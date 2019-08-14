@@ -15,7 +15,7 @@ export default new Router({
     },
     {
       path: "/my-feed",
-      name: "myFeed",
+      name: "my-feed",
       component: Home
     },
     {
@@ -45,6 +45,11 @@ export default new Router({
       path: "/editor",
       name: "editror",
       component: () => import("./views/Editor.vue")
+    },
+    {
+      path: "/articles/:slug",
+      name: "articles-page",
+      component: () => import(/** webpackChunkName: "articles" */ "./views/Article.vue")
     }
   ]
 });

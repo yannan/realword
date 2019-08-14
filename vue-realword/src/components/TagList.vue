@@ -22,9 +22,9 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-   ...mapState({
-     tags: state => state.home.tags
-   })
+    ...mapState({
+      tags: state => state.home.tags
+    })
   }
 };
 </script>

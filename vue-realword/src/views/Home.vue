@@ -22,6 +22,15 @@
                   >Global Feed</router-link
                 >
               </li>
+              <li class="nav-item" v-if="tag">
+                <router-link
+                  class="nav-link"
+                  :to="{ name: 'home-tags', params: { tag } }"
+                  active-class="active"
+                  exact
+                  ><i class="ion-pound"></i> {{ tag }}</router-link
+                >
+              </li>
             </ul>
           </div>
           <div class="article-preview" v-show="loading">loading</div>
@@ -35,16 +44,6 @@
           <div class="sidebar">
             <p>Popular Tags</p>
             <TagList />
-            <!-- <div class="tag-list">
-              <a href="" class="tag-pill tag-default">programming</a>
-              <a href="" class="tag-pill tag-default">javascript</a>
-              <a href="" class="tag-pill tag-default">emberjs</a>
-              <a href="" class="tag-pill tag-default">angularjs</a>
-              <a href="" class="tag-pill tag-default">react</a>
-              <a href="" class="tag-pill tag-default">mean</a>
-              <a href="" class="tag-pill tag-default">node</a>
-              <a href="" class="tag-pill tag-default">rails</a>
-            </div> -->
           </div>
         </div>
       </div>
@@ -65,11 +64,19 @@ export default {
     TagList
   },
   data: () => ({
-    path: undefined
+    path: undefined,
+    tag: undefined
   }),
   async created() {
     this.path = this.$route.path.includes("my-feed") ? "/feed" : "";
-    this.$store.dispatch(GET_TAGS)
+    this.tag = this.$route.params.tag;
+    this.$store.dispatch(GET_TAGS);
+    this.$store.dispatch(GET_ARTICLES, {
+      path: this.path,
+      offset: 0,
+      limit: PERPAGE_LIMIT,
+      tag: this.tag
+    });
   },
   computed: {
     ...mapState({
@@ -82,14 +89,30 @@ export default {
   watch: {
     $route() {
       this.path = this.$route.path.includes("my-feed") ? "/feed" : "";
-    },
-    path() {
+      this.tag = this.$route.params.tag;
       this.$store.dispatch(GET_ARTICLES, {
         path: this.path,
         offset: 0,
-        limit: PERPAGE_LIMIT
+        limit: PERPAGE_LIMIT,
+        tag: this.tag
       });
     }
+    // path() {
+    //   this.$store.dispatch(GET_ARTICLES, {
+    //     path: this.path,
+    //     offset: 0,
+    //     limit: PERPAGE_LIMIT,
+    //     tag: this.tag
+    //   });
+    // },
+    // tag() {
+    //   this.$store.dispatch(GET_ARTICLES, {
+    //     path: this.path,
+    //     offset: 0,
+    //     limit: PERPAGE_LIMIT,
+    //     tag: this.tag
+    //   });
+    // }
   }
 };
 </script>
