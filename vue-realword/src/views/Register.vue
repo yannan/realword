@@ -12,17 +12,32 @@
             <li>That email is already taken</li>
           </ul>
 
-          <form>
+          <form @click="handleSubmit">
             <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="text" placeholder="Your Name" />
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                placeholder="Your Name"
+                :v-model="nickname"
+              />
             </fieldset>
             <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="text" placeholder="Email" />
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                placeholder="Email"
+                v-model="email"
+              />
             </fieldset>
             <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="password" placeholder="Password" />
+              <input
+                class="form-control form-control-lg"
+                type="password"
+                placeholder="Password"
+                v-model="password"
+              />
             </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right">
+            <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
               Sign up
             </button>
           </form>
@@ -31,3 +46,20 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: "rlRegister",
+  data: () => ({
+    nickname: "",
+    email: "",
+    password: ""
+  }),
+  methods: {
+    handleSubmit: e => {
+      e.preventDefault();
+      console.log('submit')
+    }
+  }
+};
+</script>

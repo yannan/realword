@@ -38,6 +38,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import { LOGIN } from "@/store/type";
 
 export default {
   name: "rlLogin",
@@ -49,7 +50,7 @@ export default {
     async doLogin(e) {
       e.preventDefault();
       this.$store
-        .dispatch("login", {
+        .dispatch(LOGIN, {
           email: this.email,
           password: this.password
         })

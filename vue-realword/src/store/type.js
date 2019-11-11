@@ -17,3 +17,9 @@ export const SET_TAGS_DATA = "setTagsData";
  */
 export const ADD_FAVORITE = "addFavorite";
 export const REMOVE_FAVORITE = "removeFavorite";
+
+/**
+ * articles详情
+ */
+export const GET_ARTICLE_DETAIL = "getArticleDetail";
+export const SET_ARTICLE_DETAIL_DATA = "setArticleDetailData";

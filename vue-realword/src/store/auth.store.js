@@ -25,6 +25,7 @@ const actions = {
 const mutations = {
   [SET_USER](state, user) {
     state.user = user;
+    state.isAuthenticated = true;
     localStorage.setItem(TOKEN, user.token);
     setRequestToken(user.token);
   },
